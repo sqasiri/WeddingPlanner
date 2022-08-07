@@ -1,0 +1,65 @@
+<span style="display: flex; justify-content:space-between; align-items:center;">
+    <h1>Welcome to the Wedding Planner</h1>
+    <a href="/logout">Logout</a>
+</span>
+
+<table class="table table-striped">
+    <tr>
+        <th>Wedding</th>
+        <th>Date</th>
+        <th>Guest</th>
+        <th>Action</th>
+    </tr>
+    @* foreach wedding *@
+    @{
+        foreach(var item in ViewBag.Weddings)
+        {
+            <tr>
+                <td>
+                    <a href="/wedding/details/@item.WeddingId">
+                        @item.WedderOne & @item.WedderTwo               
+                    </a>
+                </td>
+                <td>@item.Date.Day/@item.Date.Month/@item.Date.Year</td>
+                <td>@item.Attendees.Count</td>
+                @if(@item.CreatorId == @ViewBag.userId)
+                {
+                    <td>
+                        <form asp-action="DeleteWedding" asp-controller="Home" method="POST">
+                            <input type="hidden" name="UserId" value="@ViewBag.userId">
+                            <input type="hidden" name="WeddingId" value="@item.WeddingId">
+                            <button>Delete</button>
+                        </form>
+                    </td>                
+                } else if(@item.CreatorId != @ViewBag.userId){
+                    bool attendant = false;
+                    foreach(var a in @item.Attendees){
+                        if(@ViewBag.userId == a.Attendee.UserId){
+                            attendant = true;
+                        }
+                    }
+                    @if(attendant == true)
+                    {
+                        <td>
+                            <form asp-action="UNRSVP" asp-controller="Home" method="POST">
+                                <input type="hidden" name="UserId" value="@ViewBag.userId">
+                                <input type="hidden" name="WeddingId" value="@item.WeddingId">
+                                <button>Un-RSVP</button>
+                            </form>
+                        </td>
+
+                    } else 
+                    {
+                        <td>
+                            <form asp-action="RSVP" asp-controller="Home" method="POST">
+                                <input type="hidden" name="UserId" value="@ViewBag.userId">
+                                <input type="hidden" name="WeddingId" value="@item.WeddingId">
+                                <button>RSVP</button>
+                            </form>
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    }
+</table>

@@ -1,0 +1,55 @@
+﻿@model User
+
+<div>
+    <div class="header">
+        @{
+            if(ViewBag.LoggedIn != true)
+            {
+                <h1>Register to this Cool Site!</h1>
+                <a href="/login/form">Login</a>
+            }
+        }
+    </div>
+    @{
+        if(ViewBag.LoggedIn == true){
+            @* use partial to display dashboard *@
+            <partial name="DashboardPartial" view-data="ViewData"/>
+        } else {
+            <form asp-action="Register" asp-controller="Home" method="POST" class="reg-form">
+                <span class="form-left">
+                    <span>
+                        <label for="first-name">First Name</label>
+                        <span style="color:red" asp-validation-for="FirstName"></span>
+                        <input type="text" asp-for="FirstName" id="first-name">
+                    </span>
+                    <span>
+                        <label for="last-name">Last Name</label>
+                        <span style="color:red" asp-validation-for="LastName"></span>
+                        <input type="text" asp-for="LastName" id="last-name">
+                    </span>
+                    <span>
+                        <label for="email">Email</label>
+                        <span style="color:red" asp-validation-for="Email"></span>
+                        <input type="email" asp-for="Email" id="email">
+                    </span>
+                    <button>Sign Up Now</button>
+                </span>
+                <span class="form-right">
+                    <span>
+                        <label for="password">Password</label>
+                        <span style="color:red" asp-validation-for="Password"></span>
+                        <input type="password" asp-for="Password" id="password">
+                    </span>
+                    <span>
+                        <label for="password2">Confirm Password</label>
+                        <span style="color:red" asp-validation-for="Confirm"></span>
+                        <input type="password" asp-for="Confirm" id="password2">
+                    </span>
+                </span>
+            </form>
+        }
+    }
+    
+</div>
+
+

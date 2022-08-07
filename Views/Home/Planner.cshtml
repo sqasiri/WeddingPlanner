@@ -1,0 +1,33 @@
+@model Wedding
+
+<div style="display: flex; justify-content: space-between">
+    <h1>Plan Your Wessing</h1>
+    <span>
+        <a href="/">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </span>
+</div>
+
+<div style="width: 50%;">
+    <form style="display: flex; flex-direction:column; width: 80%"
+        asp-controller="Home" method="POST" asp-action="CreateWedding">
+        <input type="hidden" name="CreatorId" value="@ViewBag.UserId">
+        <span style="display: flex; justify-content: space-between"> 
+            <label for="wedder-one">Wedder One</label>
+            <input type="text" name="WedderOne" id="wedder-one">
+        </span>
+        <span style="display: flex; justify-content: space-between">
+            <label for="wedder-two">Wedder Two</label>
+            <input type="text" name="WedderTwo" id="wedder-two">
+        </span>
+        <span style="display: flex; justify-content: space-between">
+            <label for="date">Date</label>
+            <input type="date" name="Date" id="date">
+        </span>
+        <span style="display: flex; justify-content: space-between">
+            <label for="address">Address</label>
+            <input type="text" name="Address" id="address">
+        </span>
+        <button style="width: 70px;">Create</button>
+    </form>
+</div>

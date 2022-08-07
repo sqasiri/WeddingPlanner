@@ -1,0 +1,12 @@
+    <div class="row">
+        <div class="col container">
+            <div class="col-10">
+                @foreach (var items in ViewBag.ImageList)
+                {
+                    var iPhotoUrl = "/images/" + items;
+                    <img class="float-left p-2" src="@iPhotoUrl" height="150" />
+
+                }
+            </div>
+        </div>
+    </div>

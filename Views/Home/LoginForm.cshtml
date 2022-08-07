@@ -1,0 +1,20 @@
+@model LoginUser
+
+<div style="display: flex; justify-content:space-around; align-items: center; margin-bottom: 50px">
+    <h1>Login to this Cool Site!</h1>
+    <a href="/">Register</a>
+</div>
+<form style="display: flex; flex-direction:column; width: 20%;" asp-action="LoginUser" method="POST" asp-controller="Home">
+    <span style="display: flex; flex-direction:column">
+        <label for="email">Email</label>
+        <span style="color: red;" asp-validation-for="Email"></span>
+        <input type="email" name="Email" id="email">
+    </span>
+    <span style="display: flex; flex-direction:column">
+        <label for="password">Password</label>
+        <span style="color: red;" asp-validation-for="Password"></span>
+        <input type="password" name="Password" id="password">
+    </span>
+    <button style="margin-top:10px; width:50%;">Login</button>
+</form>
+
